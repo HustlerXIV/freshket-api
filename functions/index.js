@@ -1,6 +1,7 @@
 const functions = require("firebase-functions");
 const express = require("express");
 const { rateLimit } = require("express-rate-limit");
+const cors = require("cors");
 
 const app = express();
 
@@ -11,6 +12,8 @@ const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
 });
+
+app.use(cors({ origin: true }));
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
